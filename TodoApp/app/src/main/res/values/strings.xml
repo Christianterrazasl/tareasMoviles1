@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">TodoApp</string>
+    <string name="cambiar_color">Cambiar color</string>
+    <string name="descripci_n_de_la_tarea">Descripción de la tarea</string>
+    <string name="hecha">Hecha</string>
+    <string name="t_tulo_de_la_tarea">Título de la tarea</string>
+</resources>
