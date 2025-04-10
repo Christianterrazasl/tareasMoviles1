@@ -12,6 +12,7 @@ import androidx.core.graphics.toColorInt
 
 class TareaAdapter(var tareas : ArrayList<Tarea>) : RecyclerView.Adapter<TareaAdapter.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+
         val inflater = LayoutInflater.from(parent.context)
         val binding = TareasItemBinding.inflate(inflater, parent, false)
         return ViewHolder(binding)
@@ -39,6 +40,8 @@ class TareaAdapter(var tareas : ArrayList<Tarea>) : RecyclerView.Adapter<TareaAd
             binding.colorPickerBtn.setOnClickListener {
                 mostrarDialogoColor(binding.root.context, item)
             }
+
+
         }
 
         private fun mostrarDialogoColor(context: Context, tarea: Tarea){

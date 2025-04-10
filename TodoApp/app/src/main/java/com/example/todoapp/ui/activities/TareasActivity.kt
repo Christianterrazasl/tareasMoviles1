@@ -1,5 +1,6 @@
 package com.example.todoapp.ui.activities
 
+import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
@@ -16,6 +17,12 @@ import androidx.core.graphics.toColorInt
 
 class TareasActivity : AppCompatActivity() {
     private lateinit var binding : ActivityTareasBinding
+    var tareas = arrayListOf<Tarea>(
+        Tarea("Pasear al perro", "Sacarlo al perro a pasear", false,
+            "#F44336".toColorInt()),
+        Tarea("Lavar la ropa", "Lavar la ropa de la semana", false, "#2196F3".toColorInt()),
+        Tarea("Comprar soda", "Ir al super y comprar leche", true, "#03A9F4".toColorInt())
+    )
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,15 +36,10 @@ class TareasActivity : AppCompatActivity() {
         }
 
         setupRecyclerView()
+        setOnClickListeners()
     }
 
     private fun setupRecyclerView() {
-        var tareas = arrayListOf<Tarea>(
-            Tarea("Pasear al perro", "Sacarlo a pasear porque si no se hace caca", false,
-                "#F44336".toColorInt()),
-            Tarea("Lavar la ropa", "Lavar porque si no huele mal", false, "#2196F3".toColorInt()),
-            Tarea("Comprar leche", "Ir al super y comprar leche", true, "#03A9F4".toColorInt())
-        )
 
         val adapter = TareaAdapter(tareas)
         binding.rvTareas.apply {
@@ -47,5 +49,16 @@ class TareasActivity : AppCompatActivity() {
             }
 
         }
+
+
     }
+
+    private fun setOnClickListeners(){
+        binding.btnAgregarTarea.setOnClickListener {
+            val intent = Intent(this, CrearTareaActivity::class.java)
+            startActivity(intent)
+        }
+    }
+
+
 }
