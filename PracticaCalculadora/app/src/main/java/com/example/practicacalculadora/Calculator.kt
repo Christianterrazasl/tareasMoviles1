@@ -27,6 +27,7 @@ fun Calculator(modifier: Modifier = Modifier) {
     var result by remember { mutableStateOf("") }
     var prevNumber by remember { mutableIntStateOf(0) }
     var currentOperation by remember { mutableStateOf("") }
+    var memoryNumber by remember {mutableStateOf(0)}
     Column(
         modifier = modifier
             .padding(8.dp)
@@ -81,6 +82,29 @@ fun Calculator(modifier: Modifier = Modifier) {
             onClearAllClick = {
                 result = ""
             }
+        )
+        MemoryOperationsPanel(
+            onMemoryClearClick = {
+                memoryNumber = 0
+            },
+            onMemoryRecoverClick = {
+                result= memoryNumber.toString()
+            },
+            onMemoryPlusClick = {
+                val currentNumber = result.toIntOrNull() ?: 0
+                result = (memoryNumber + currentNumber).toString()
+
+            },
+            onMemoryMinusClick = {
+                val currentNumber = result.toIntOrNull() ?: 0
+                result = (currentNumber - memoryNumber).toString()
+
+            },
+            onMemorySaveClick = {
+                memoryNumber = result.toIntOrNull() ?: 0
+            }
+
+
         )
     }
 }
@@ -168,6 +192,62 @@ fun OperationsPanel(
         )
     }
 }
+
+@Composable
+fun MemoryOperationsPanel(
+
+    onMemoryClearClick: ()-> Unit = {},
+    onMemoryRecoverClick: ()-> Unit = {},
+    onMemoryPlusClick: ()-> Unit = {},
+    onMemoryMinusClick: ()-> Unit = {},
+    onMemorySaveClick: () ->  Unit = {},
+    modifier: Modifier = Modifier
+) {
+    Row(
+        horizontalArrangement = Arrangement.spacedBy(8.dp),
+    ) {
+        com.example.practicacalculadora.TextButton(
+            text = "MC",
+            onClick = {
+               onMemoryClearClick()
+            },
+            modifier = Modifier
+                .weight(1f)
+        )
+        com.example.practicacalculadora.TextButton(
+            text = "MR",
+            onClick = {
+                onMemoryRecoverClick()
+            },
+            modifier = Modifier
+                .weight(1f)
+        )
+        com.example.practicacalculadora.TextButton(
+            text = "M+",
+            onClick = {
+                onMemoryPlusClick()
+            },
+            modifier = Modifier
+                .weight(1f)
+        )
+        com.example.practicacalculadora.TextButton(
+            text = "M-",
+            onClick = {
+                onMemoryMinusClick()
+            },
+            modifier = Modifier
+                .weight(1f)
+        )
+        com.example.practicacalculadora.TextButton(
+            text = "MS",
+            onClick = {
+                onMemorySaveClick()
+            },
+            modifier = Modifier
+                .weight(1f)
+        )
+    }
+    }
 
 @Composable
 fun NumberPanel(
