@@ -1,6 +1,7 @@
 package com.example.practico3.api
-import com.example.practico3.data.Lugar
-import com.example.practico3.data.Viaje
+
+import com.example.practico4.data.Punto
+import com.example.practico4.data.Ruta
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.DELETE
@@ -8,31 +9,31 @@ import retrofit2.http.GET
 import retrofit2.http.POST
 import retrofit2.http.Path
 
-interface TravelApi {
-    @GET("trips/")
-    suspend fun getTrips(): List<Viaje>
+interface RoutesApi {
 
-    @GET("trips/{tripId}/places")
-    suspend fun getPlaces(@Path("tripId") tripId: Int): List<Lugar>
+    //rutas (no es ia esto)
 
-    @GET("trips/{username}")
-    suspend fun getUserTrips(@Path("username") username: String): List<Viaje>
+    @GET("routes")
+    suspend fun getRoutes(): List<Ruta>
 
-    @GET("places/{placeId}")
-    suspend fun getPlace(@Path("placeId") placeId: Int): Lugar
+    @GET("routes/{username}")
+    suspend fun getUserRoutes(@Path("username") username:String): List<Ruta>
 
-    @POST("trips")
-    suspend fun postTrip(@Body trip: Viaje): Response<Viaje>
+    @POST("routes")
+    suspend fun postRoute(@Body route: Ruta): Response<Ruta>
 
-    @POST("places")
-    suspend fun postPlace(@Body place:Lugar): Response<Lugar>
-
-    @DELETE("places/{placeId}")
-    suspend fun deletePlace(@Path("placeId") placeId: Int):Response<Lugar>
-
-    @DELETE("trips/{tripId}")
-    suspend fun deleteTrip(@Path("tripId") tripId: Int):Response<Viaje>
+    @DELETE("routes/{routeId}")
+    suspend fun deleteRoute(@Path("routeId") routeId:Int): Response<Void>
 
 
+    //puntos (tampoco)
 
+    @GET("routes/{routeId}/locations")
+    suspend fun getRoutePoints(@Path("routeId") routeId:Int) : List<Punto>
+
+    @POST("locations")
+    suspend fun postPoint(@Body point: Punto): Response<Punto>
+
+    @DELETE("locations/{pointId}")
+    suspend fun deletePoint(@Path("pointId") pointId:Int): Response<Void>
 }
